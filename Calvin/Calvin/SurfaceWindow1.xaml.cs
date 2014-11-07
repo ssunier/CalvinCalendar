@@ -23,6 +23,10 @@ namespace Calvin
     /// </summary>
     public partial class SurfaceWindow1 : SurfaceWindow
     {
+        public class LibraryContainer : Control
+        {
+
+        }
         /// <summary>
         /// Default constructor.
         /// </summary>

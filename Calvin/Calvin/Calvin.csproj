@@ -94,6 +94,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Chrysanthemum.jpg" />
+    <Resource Include="Resources\Desert.jpg" />
+    <Resource Include="Resources\Hydrangeas.jpg" />
     <Content Include="Resources\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
