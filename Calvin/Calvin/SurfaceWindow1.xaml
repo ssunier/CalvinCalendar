@@ -2,9 +2,43 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="http://schemas.microsoft.com/surface/2008"
-    Title="Calvin"
-    >
-  <Grid>
-
-  </Grid>
+    Title="Calvin">
+    
+    <Grid>
+        <s:LibraryContainer
+            Name="Monday"
+            Height="250" Width="860"
+            Grid.Row="0"
+            ViewingMode="Bar"
+            CanSwitchViewingMode="True"
+            ItemsSource="{Binding Source={StaticResource Source}}">
+            <s:LibraryContainer.StackView>
+                <s:StackView
+                    NormalizedTransitionSize="1,1"
+                    ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:StackView>
+            </s:LibraryContainer.StackView>
+        </s:LibraryContainer>
+        <!--<XmlDataProvider x:Key="Data" XPath="TestyTest">
+            <x:XData>
+                <TestyTest xmlns="">
+                    <Item Name="Chrysanthemum" Location="IDK" Size="Small"/>
+                    
+                </TestyTest>
+            </x:XData>
+        </XmlDataProvider>
+        
+        <CollectionViewSource x:Key="Source" Source="{Binding Source={StaticResource Data}, XPath=Item}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="@Size"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+        -->
+        
+    </Grid>
 </s:SurfaceWindow>
+<DataTemplate x:Key="ContainerItemTemplate">
+    <Border BorderThickness="1" BorderBrush="White" Margin="3">
+        <TextBlock Width="120" Text="{Binding XPath=@Name}" Padding="3" Background="AliceBlue"/>
+    </Border>
+</DataTemplate>
