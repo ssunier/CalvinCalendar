@@ -104,6 +104,7 @@
     <Resource Include="Resources\calvin1.png" />
     <Resource Include="Resources\grocery.png" />
     <Resource Include="Resources\blank-calendar.jpg" />
+    <Resource Include="Resources\blank-calendar2.png" />
     <Content Include="Resources\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
