@@ -1,0 +1,42 @@
+ssunier
+First Notebook
+Notebook(restrictions=NotebookRestrictions(noSetDefaultNotebook=None, noPublishToBusinessLibrary=None, noCreateTags=None, noUpdateNotes=None, expungeWhichSharedNotebookRestrictions=None, noExpungeTags=None, noSetNotebookStack=None, noCreateSharedNotebooks=None, noExpungeNotebook=None, noUpdateTags=None, noPublishToPublic=None, noUpdateNotebook=None, updateWhichSharedNotebookRestrictions=None, noSetParentTag=None, noCreateNotes=None, noEmailNotes=True, noReadNotes=None, noExpungeNotes=None, noShareNotes=None, noSendMessageToRecipients=None), name='First Notebook', defaultNotebook=True, serviceUpdated=1413555389000, sharedNotebookIds=None, businessNotebook=None, contact=None, sharedNotebooks=None, updateSequenceNum=1, published=None, serviceCreated=1413555389000, guid='55e90895-86fd-4b7e-b8e6-a8b66e1e6481', stack=None, publishing=None)
+CalvinCalendar
+
+
+
+Notebook(restrictions=NotebookRestrictions(
+          noSetDefaultNotebook=None,
+          noPublishToBusinessLibrary=None,
+          noCreateTags=None,
+          noUpdateNotes=None,
+          expungeWhichSharedNotebookRestrictions=None,
+          noExpungeTags=None, noSetNotebookStack=None,
+          noCreateSharedNotebooks=None,
+          noExpungeNotebook=None,
+          noUpdateTags=None,
+          noPublishToPublic=None,
+          noUpdateNotebook=None,
+          updateWhichSharedNotebookRestrictions=None,
+          noSetParentTag=None,
+          noCreateNotes=None,
+          noEmailNotes=True,
+          noReadNotes=None,
+          noExpungeNotes=None,
+          noShareNotes=None,
+          noSendMessageToRecipients=None
+        ),
+        name='CalvinCalendar',
+        defaultNotebook=False,
+        serviceUpdated=1414697625000,
+        sharedNotebookIds=None,
+        businessNotebook=None,
+        contact=None,
+        sharedNotebooks=None,
+        updateSequenceNum=12,
+        published=None,
+        serviceCreated=1414697625000,
+        guid='cdbc8617-c551-4148-b659-7ccb5d47859e',
+        stack=None,
+        publishing=None
+      )
