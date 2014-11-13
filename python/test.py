@@ -14,11 +14,11 @@ filterNote.notebookGuid = 'cdbc8617-c551-4148-b659-7ccb5d47859e'
 searchResults = NoteStore.findNotes(filterNote, 0, 10)
 
 for note in searchResults.notes:
-  print note.resources
-  resources = note.resources
-  #try:
-  print resources.getGuid
-  #except:
-  #  print 'whoops'
-
-resource = NoteStore.getResource('f2db5345-2552-451e-8e21-13f9fa243450', True, False, True, False)
+  if note.resources != None:
+    for r in note.resources:
+      guid = r.guid
+      resource = NoteStore.getResource(guid, True, False, True, False)
+      file_content = resource.data.body
+      file_type = resource.mime
+      file_name = resource.attributes.fileName
+      print file_name
