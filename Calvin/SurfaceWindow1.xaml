@@ -37,8 +37,8 @@
         </Grid.RowDefinitions>
         
         <Grid.Background>
-            <ImageBrush ImageSource="Resources/blank-calendar.jpg"
-                        Stretch="Uniform"/>
+            <ImageBrush ImageSource="Resources/calvin1.png"
+                        Stretch="UniformToFill"/>
         </Grid.Background>
 
      
