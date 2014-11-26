@@ -18,7 +18,13 @@ for note in searchResults.notes:
     for r in note.resources:
       guid = r.guid
       resource = NoteStore.getResource(guid, True, False, True, False)
+      
+      # get the file content so you can save it
       file_content = resource.data.body
-      file_type = resource.mime
       file_name = resource.attributes.fileName
+
+      # save the file into the output folder
+      file_save = open('output/' + file_name, "w")
+      file_save.write(file_content)
+      file_save.close()
       print file_name
