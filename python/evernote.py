@@ -59,7 +59,6 @@ def main(argv):
       if note.resources != None:
         for r in note.resources:
           if not (r.guid in guidList):
-            print 'hi'
             guidList.append(save_files(NoteStore, r.guid))
           else:
             print r.guid
