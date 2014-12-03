@@ -61,7 +61,7 @@ def main(argv):
           if not (r.guid in guidList):
             guidList.append(save_files(NoteStore, r.guid))
           else:
-            print r.guid
+            print(r.guid)
 
 if __name__ == '__main__':
     main(sys.argv)
