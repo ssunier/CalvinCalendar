@@ -1,9 +1,6 @@
 #!/usr/bin/python
 import sys, os
 
-# import threading packages
-import thread
-
 # import evernote packages
 from evernote.api.client import EvernoteClient
 from evernote.edam.notestore.ttypes import NoteFilter, NotesMetadataResultSpec
