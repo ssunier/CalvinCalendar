@@ -177,8 +177,9 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .navbar-default .navbar-brand {
-    font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
-    color: #fed136;
+    /*font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;*/
+    font-family: 'Quicksand', sans-serif; font-weight: 700; /*edited here*/
+    color: #fed136; /*THIS HERE: COLR OF LOGO TEXT*/
 }
 
 .navbar-default .navbar-brand:hover,
@@ -208,8 +209,9 @@ fieldset[disabled] .btn-xl.active {
 
 .navbar-default .nav li a {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 400;
+    /*font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-family: 'Quicksand', sans-serif; /*edited here*/
+    font-weight: 700;
     letter-spacing: 1px;
     color: #ff7926; /*edited here*/
 }
