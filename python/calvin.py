@@ -1,5 +1,12 @@
 #!/usr/bin/python
-import sys, os
+import sys, os, inspect
+
+# get the evernote submodules from a subfolder
+#cmd_evernote = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.currentframe()))[0], "C:\Users\Orit\Downloads\evernote-sdk-python-master\evernote-sdk-python-master")))
+#if cmd_evernote not in sys.path:
+#  sys.path.insert(0, cmd_evernote)
+
+#sys.path.append("C:\Users\Orit\Downloads\evernote-sdk-python-master\evernote-sdk-python-master\build\lib\evernote")
 
 # import evernote packages
 from evernote.api.client import EvernoteClient
@@ -12,6 +19,7 @@ save_files method
 makes a call to the evernote client to get the image file
 saves that file in a folder
 '''
+
 def save_files(NoteStore, guid):
   resource = NoteStore.getResource(guid, True, False, True, False)
   # get the file content so you can save it
@@ -24,7 +32,6 @@ def save_files(NoteStore, guid):
   file_save.close()
 
   return guid
-
   
 
 '''
