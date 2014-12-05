@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, os, inspect
+import sys, os, inspect, time
 
 # get the evernote submodules from a subfolder
 #cmd_evernote = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.currentframe()))[0], "C:\Users\Orit\Downloads\evernote-sdk-python-master\evernote-sdk-python-master")))
@@ -27,7 +27,7 @@ def save_files(NoteStore, guid):
   file_name = resource.attributes.fileName
 
   #save the file into the output folder
-  file_save = open('notes/' + file_name, 'w')
+  file_save = open('notes/' + file_name, 'wb')
   file_save.write(file_content)
   file_save.close()
 
@@ -54,18 +54,28 @@ def main(argv):
     if note.resources != None:
       for r in note.resources:
         # save each livescribe file and add the guid to the list
-        guidList.append(save_files(NoteStore, r.guid))
-  
+        try:
+          guidList.append(save_files(NoteStore, r.guid))
+        except:
+          print 'Unexpected error when saving original files:', sys.exc_info()[0]
+          raise
   # now you start the evernote listening thread
   while(True):
     newNote = NoteStore.findNotes(filterNote, 0, 1)
     for note in newNote.notes:
       if note.resources != None:
-        for r in note.resources:
-          if not (r.guid in guidList):
-            guidList.append(save_files(NoteStore, r.guid))
-          else:
-            print(r.guid)
+        try:
+          for r in note.resources:
+            if not (r.guid in guidList):
+              guidList.append(save_files(NoteStore, r.guid))
+              print 'found new image:', r.guid, 'going to sleep for 10 seconds'
+              time.sleep(10)
+            else:
+              print 'no new images - going to sleep for 20 seconds'
+              time.sleep(20)
+        except:
+          print 'Unexpected error when looping:', sys.exc_info()[0]
+          raise
 
 if __name__ == '__main__':
     main(sys.argv)

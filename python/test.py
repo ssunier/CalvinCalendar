@@ -1,9 +1,8 @@
+import sys
 from evernote.api.client import EvernoteClient
 from evernote.edam.notestore.ttypes import NoteFilter, NotesMetadataResultSpec
 from evernote.edam.type.ttypes import NoteSortOrder
-import hashlib
-import binascii
-
+import time
 
 dev_token = "S=s1:U=8fb0e:E=150ba27eb99:C=1496276bc48:P=1cd:A=en-devtoken:V=2:H=cb6610893ef12aa4b914d15d19befa09"
 client = EvernoteClient(token=dev_token, sandbox=True)
@@ -41,13 +40,19 @@ for note in searchResults.notes:
 
       resource = NoteStore.getResource(guid, True, False, True, False)
       #print resource
-      # get the file content so you can save it
-      file_content = resource.data.body
-      print file_content
-      file_name = resource.attributes.fileName
-      #print file_name
-      # save the file into the output folder
-      file_save = open('output/' + file_name, "w")
-      #file_save.write(file_content)
-      file_save.close()
-      print file_name
+      try:
+        # get the file content so you can save it
+        file_content = resource.data.body
+        #print file_content
+        file_name = resource.attributes.fileName
+        #print file_name
+        # save the file into the output folder
+        file_save = open('output/' + 'img.jpg', "wb")
+        file_save.write(file_content);
+        file_save.close()
+        print file_name
+        print 'going to sleep now'
+        time.sleep(20)
+      except:
+        print "Unexpected error:", sys.exc_info()[0]
+        raise
