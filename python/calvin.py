@@ -40,6 +40,7 @@ runs in the background once the program has been started
 crawling evernote for new notes in the livescribe notebook
 '''
 def main(argv):
+  print 'starting the python process'
   # the list of already entered images
   guidList = []
   # Evernote login credentials

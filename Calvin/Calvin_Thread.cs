@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Diagnostics; // Process
+using System.IO; // StreamReader
+
 
 namespace Threading
 {
@@ -36,20 +38,36 @@ namespace Threading
             {
                 Console.WriteLine("\r\nLaunching the evernote checking python script... thread's managed thread id: " + Thread.CurrentThread.ManagedThreadId.ToString());
                 Process p = new Process(); // create a new process for the python program to run in
-                string pythonFile = @"C:\\Users\\Orit\\Documents\\GitHub\\CalvinCalendar\\python\\evernote.py";
-                //p.StartInfo = new ProcessStartInfo("cmd", "/K " + pythonFile + " & exit")
-                p.StartInfo = new ProcessStartInfo(@"C:\Python33\python.exe", pythonFile)
-                {
+                string pythonFile = @"C:\\Users\\Orit\\Documents\\GitHub\\CalvinCalendar\\python\\tmp.py";
+                //p.StartInfo = new ProcessStartInfo("cmd", "python27 " + pythonFile)
+                //p.StartInfo = new ProcessStartInfo(@"C:\Python27\python.exe", pythonFile)
+                /*{
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
-                };
+                };*/
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.FileName = @"C:\\Python27\\python27.exe";
+                p.StartInfo.Arguments = pythonFile;
                 p.Start();
+                /*ProcessStartInfo start = new ProcessStartInfo();
+                start.FileName = pythonFile;
+                start.UseShellExecute = true;
+                start.RedirectStandardOutput = true;
+                Console.Write("hello - I started");
+                using (Process process = Process.Start(start))
+                {
+                    using (StreamReader reader = process.StandardOutput)
+                    {
+                        string result = reader.ReadToEnd();
+                        Console.Write(result);
+                    }
+                }*/
                 Console.WriteLine("made it through starting the process");
-                string output = p.StandardOutput.ReadToEnd();
+                //string output = p.StandardOutput.ReadToEnd();
                 //p.WaitForExit();
-                Console.WriteLine(output);
-                Console.ReadLine();
+                //Console.WriteLine(output);
+                //Console.ReadLine();
             }
         }
     }
