@@ -16,6 +16,10 @@ using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
+
+using Threading;
 
 namespace Drag_and_Drop
 {
@@ -61,19 +65,22 @@ namespace Drag_and_Drop
         public SurfaceWindow1()
         {
             this.DataContext = this;
-
+            main = this;
             InitializeComponent();
 
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
         }
-
+        internal static SurfaceWindow1 main;
+        public delegate void calvinDelegate(string s);
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
             DataContext = this;
 
-            LibraryItems.Add(new PhotoData("Resources/practice.png",""));
+            ThreadPool.QueueUserWorkItem(new WaitCallback(Threading.Calvin_Thread.RunCalvin));
+
+            LibraryItems.Add(new PhotoData("Resources/practice.png", ""));
             LibraryItems.Add(new PhotoData("Resources/late.png", ""));
             LibraryItems.Add(new PhotoData("Resources/grocery.png", ""));
             //LibraryItems.Add(new PhotoData("Images/Jellyfish.jpg", "Jellyfish"));
@@ -81,6 +88,8 @@ namespace Drag_and_Drop
             //LibraryItems.Add(new PhotoData("Images/Lighthouse.jpg", "Lighthouse"));
             //LibraryItems.Add(new PhotoData("Images/Penguins.jpg", "Penguins"));
             //LibraryItems.Add(new PhotoData("Images/Tulips.jpg", "Tulips"));
+
+            //Threading.Calvin_Thread.Main();
         }
 
         /// <summary>
@@ -206,6 +215,8 @@ namespace Drag_and_Drop
 
             // Hide the ScatterViewItem for now. We will remove it if the DragDrop is successful.
             draggedElement.Visibility = Visibility.Hidden;
+
+            //Threading.Calvin_Thread.Main();
         }
 
         private void Scatter_DragCanceled(object sender, SurfaceDragDropEventArgs e)
@@ -341,7 +352,11 @@ namespace Drag_and_Drop
             // Setting e.Handle to true ensures that default behavior is not performed.
             e.Handled = true;
         }
-
-      
+        public void Update_Label(object sender, string s)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+                PythonOutput.Content = s
+            ));
+        }
     }
 }
