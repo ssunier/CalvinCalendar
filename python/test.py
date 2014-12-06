@@ -13,18 +13,48 @@ filterNote.notebookGuid = 'cdbc8617-c551-4148-b659-7ccb5d47859e'
 
 searchResults = NoteStore.findNotes(filterNote, 0, 10)
 
-for note in searchResults.notes:
-  if note.resources != None:
-    for r in note.resources:
-      guid = r.guid
-      resource = NoteStore.getResource(guid, True, False, True, False)
-      
-      # get the file content so you can save it
-      file_content = resource.data.body
-      file_name = resource.attributes.fileName
+def getImage(count, rerun):
+  for note in searchResults.notes:
+    if note.resources != None:
+      for r in note.resources:
+        guid = r.guid
+        print guid
+        try:
+          resource = NoteStore.getResource(guid, True, False, True, False)
+          # get the file content so you can save it
+          file_content = resource.data.body
+          #print file_content
+          file_name = resource.attributes.fileName
 
-      # save the file into the output folder
-      file_save = open('output/' + file_name, "w")
-      file_save.write(file_content)
-      file_save.close()
-      print file_name
+          # save the file into the output folder
+          file_save = open('output/' + file_name, "wb")
+          file_save.write(file_content)
+          file_save.close()
+          print file_name
+        except:
+          rerun = False
+          #keepRunning = True
+          #print "re-running"
+          #print count
+
+count = 1
+rerun = True
+getImage(count, rerun)
+print "finished first iteration"
+
+if (rerun):
+  print "Going to rerun"
+  count+=1
+  if (count <= 3):
+    print "re-running: iteration " + str(count)
+    getImage(count, rerun)
+
+if (rerun):
+  print "Going to rerun"
+  count+=1
+  if (count <= 3):
+    print "re-running: iteration " + str(count)
+    getImage(count, rerun)
+
+print "evernote is shit"
+  
