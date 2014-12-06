@@ -17,6 +17,7 @@ using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Threading.Tasks;
 
 using Threading;
 
@@ -64,13 +65,14 @@ namespace Drag_and_Drop
         public SurfaceWindow1()
         {
             this.DataContext = this;
-
+            main = this;
             InitializeComponent();
 
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
         }
-
+        internal static SurfaceWindow1 main;
+        public delegate void calvinDelegate(string s);
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
@@ -349,6 +351,12 @@ namespace Drag_and_Drop
             boxItem.Visibility = System.Windows.Visibility.Visible;
             // Setting e.Handle to true ensures that default behavior is not performed.
             e.Handled = true;
+        }
+        public void Update_Label(object sender, string s)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+                PythonOutput.Content = s
+            ));
         }
     }
 }
