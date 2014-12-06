@@ -27,17 +27,20 @@ p {
 p.large {
     font-size: 16px;
 }
-
+/*Morgyne edited here, edited background-color */
 a,
 a:hover,
 a:focus,
 a:active,
 a.active {
     outline: 0;
+    background-color: #07d9c4;
+   
 }
 
 a {
     color: #fed136;
+
 }
 
 a:hover,
@@ -78,6 +81,8 @@ h6 {
     color: #fff;
     background-color: #fed136;
 }
+
+
 
 .btn-primary:hover,
 .btn-primary:focus,
@@ -269,7 +274,7 @@ header {
     text-align: center;
     color: #ff7926; /*edited here*/
     background-attachment: scroll;
-    background-image: url(../img/header-bg.jpg);
+    background-image: url(../images/cover.png); /*added new image*/
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;
@@ -281,6 +286,8 @@ header {
 header .intro-text {
     padding-top: 100px;
     padding-bottom: 50px;
+
+
 }
 
 header .intro-text .intro-lead-in {
@@ -290,6 +297,8 @@ header .intro-text .intro-lead-in {
     font-size: 22px;
     font-style: italic;
     line-height: 22px;
+    
+
 }
 
 header .intro-text .intro-heading {
@@ -300,6 +309,7 @@ header .intro-text .intro-heading {
     font-size: 50px;
     font-weight: 700;
     line-height: 50px;
+    
 }
 
 @media(min-width:768px) {
@@ -657,6 +667,47 @@ section h3.section-subheading {
 
 aside.clients img {
     margin: 50px auto;
+}
+/*edited*/
+section#about{
+    background-color: #a60abc;
+    color: white;
+
+}
+
+section#about .section-subheading{
+    color: #f5f5f5;
+}
+/*edited */
+section#about .section-heading{
+    color: white;
+}
+
+section#concept{
+    background-color: #d90b31;
+    color: white;
+}
+ 
+section#concept .section-subheading{
+    color: #f5f5f5;
+}
+
+section#concept .section-heading{
+    color: white;
+    }
+
+section#design{
+    background-color: #a60abc;
+    color: white;
+}
+
+section#design .section-subheading{
+    color:#f5f5f5;
+}
+
+section#future{
+    background-color: #d90b31;
+    color: white;
 }
 
 section#contact {
