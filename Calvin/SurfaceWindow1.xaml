@@ -79,6 +79,9 @@
             s:SurfaceDragDrop.DragCompleted="Scatter_DragCompleted"
             s:SurfaceDragDrop.Drop="Scatter_Drop">
         </s:ScatterView>
+        
+        <Label Name="PythonOutput" Background="Gray" Visibility="Visible" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Python Output"></Label>
+        
     </Grid>
 </s:SurfaceWindow>
 
