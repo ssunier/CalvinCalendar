@@ -37,7 +37,7 @@
         </Grid.RowDefinitions>
         
         <Grid.Background>
-            <ImageBrush ImageSource="Resources/calvin1.png"
+            <ImageBrush ImageSource="calvin1.png"
                         Stretch="UniformToFill"/>
         </Grid.Background>
 
@@ -80,7 +80,7 @@
             s:SurfaceDragDrop.Drop="Scatter_Drop">
         </s:ScatterView>
         
-        <Label Name="PythonOutput" Background="Gray" Visibility="Visible" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Python Output"></Label>
+        <Label Name="PythonOutput" Background="Gray" Visibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Python Output"></Label>
         
     </Grid>
 </s:SurfaceWindow>

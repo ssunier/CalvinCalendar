@@ -21,16 +21,11 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 // THREADING IMPORTS
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Diagnostics; // Process
 using System.IO; // StreamReader
 using System.Data;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
+// IMPORTING IMAGES
+using System.Collections;
 
 
 //using Threading;
@@ -47,10 +42,10 @@ namespace Drag_and_Drop
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling=true /*CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall*/)]
         public static extern bool FreeConsole();
         #region Collections
-        private ObservableCollection<PhotoData> libraryItems;
-        private ObservableCollection<PhotoData> scatterItems;
+        private static ObservableCollection<PhotoData> libraryItems;
+        private static ObservableCollection<PhotoData> scatterItems;
 
-        public ObservableCollection<PhotoData> LibraryItems
+        public static ObservableCollection<PhotoData> LibraryItems
         {
             get
             {
@@ -80,50 +75,45 @@ namespace Drag_and_Drop
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public SurfaceWindow1()
+        public SurfaceWindow1()//Delegate d
         {
             this.DataContext = this;
-            display = this;
+            //display = this;
             InitializeComponent();
 
             // Add handlers for window availability events
             //AddWindowAvailabilityHandlers();
-        }
-        internal static SurfaceWindow1 display;
-        //public delegate void calvinDelegate(string s);
-        //===========================================================================
-        //===========================================================================
-        //===========================================================================
-        public delegate void DoWorkDelegate(object sender, DoWorkEventArgs e);
+        }//);
 
-        public void DoThingsIDKmanidkwhatimdoing()
+        //===================================================================================================
+        //TRYING SOME SHIT HERE TO GET THE BINDING WORKING
+        //===================================================================================================
+
+        public static void ProcessDirectory(String targetDirectory)
         {
-            //StartWorker(new DoWorkDelegate(Calvin_Thread.bw_DoWork));
-            StartWorker(new DoWorkDelegate(bw_DoWork));
-
+            //System.IO.Directory myDir;
+            // Process the list of files found in the directory
+            string[] fileEntries = Directory.GetFiles(@"C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\" + targetDirectory);
+            //IEnumerable fileEntries = Directory.EnumerateFiles(targetDirectory);
+            Console.WriteLine("files: " + Directory.GetFiles(@"C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\" + targetDirectory));
+            Console.WriteLine("inside process directory");
+            //Console.WriteLine(Directory.EnumerateFiles(targetDirectory));
+            //Console.WriteLine(targetDirectory);
+            foreach (string fileName in fileEntries)
+            {
+                //ProcessFile(fileEntries);
+                Console.WriteLine("Trying to add images now");
+                Console.WriteLine(fileName);
+                LibraryItems.Add(new PhotoData(fileName, ""));
+                Console.WriteLine("Potentially added the images??? IDK");
+            }
         }
-
-        public void StartWorker(DoWorkDelegate task)
+        /*
+        // Do the stuff lsksflkdsf here
+        public static void ProcessFile(string[] fileEntries)
         {
-            BackgroundWorker bw = new BackgroundWorker();
-            bw.WorkerReportsProgress = true;
-            Console.WriteLine("About to have background worker do work");
-            //FreeConsole();
-            bw.DoWork += new DoWorkEventHandler(task);
-            bw.RunWorkerAsync();
-            //bw.DoWork += new DoWorkEventHandler(Calvin_Thread.bw_DoWork); //this here isn't doing anything
-            Console.WriteLine(bw.IsBusy); //currently writing false so is not busy
-            //while (bw.IsBusy)
-            //{
-              //  Console.WriteLine("busy bw");
-            //}
-            Console.WriteLine("done");
-        }
-
-
-        //===========================================================================
-        //===========================================================================
-        //===========================================================================
+            foreach 
+        }*/
 
         protected override void OnInitialized(EventArgs e)
         {
@@ -131,11 +121,17 @@ namespace Drag_and_Drop
             DataContext = this;
             AllocConsole();
             Console.WriteLine("About to create a new queuing Thread.  Current Thread:" + Thread.CurrentThread.ManagedThreadId);
-            LibraryItems.Add(new PhotoData("Resources/practice.png", ""));
-            LibraryItems.Add(new PhotoData("Resources/late.png", ""));
-            LibraryItems.Add(new PhotoData("Resources/grocery.png", ""));
-            AddWindowAvailabilityHandlers();
-            DoThingsIDKmanidkwhatimdoing();
+            Dispatcher.Invoke((Action) delegate()
+            {
+                Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                LibraryItems.Add(new PhotoData("Resources/practice.png", ""));
+                LibraryItems.Add(new PhotoData("Resources/late.png", ""));
+                LibraryItems.Add(new PhotoData("Resources/grocery.png", ""));
+                AddWindowAvailabilityHandlers();
+                EvernoteBackend();
+            });
+            Console.WriteLine("Idk when this will get called.");
+            //EvernoteBackend();
             /*
             BackgroundWorker bw = new BackgroundWorker();
             bw.WorkerReportsProgress = true;
@@ -147,23 +143,136 @@ namespace Drag_and_Drop
             {
                 Console.WriteLine("busy bw");
             }*/
-            //Console.WriteLine();
-            //while (true)
-            //{
-                //ThreadPool.QueueUserWorkItem(new WaitCallback(Calvin_Thread.ThreadTest));
-
-                //Console.WriteLine("SurfaceWindow thead does some work, then sleeps.");
-               
-                //Thread.Sleep(100);
-                //WaitHandle.WaitAll(evs);
-                //Console.WriteLine("SurfaceWindow thread exits.");
-            // }
-            //LibraryItems.Add(new PhotoData("Images/Jellyfish.jpg", "Jellyfish"));
-            //LibraryItems.Add(new PhotoData("Images/Koala.jpg", "Koala"));
-            //LibraryItems.Add(new PhotoData("Images/Lighthouse.jpg", "Lighthouse"));
-            //LibraryItems.Add(new PhotoData("Images/Penguins.jpg", "Penguins"));
-            //LibraryItems.Add(new PhotoData("Images/Tulips.jpg", "Tulips"));
         }
+        //internal static SurfaceWindow1 display;
+        //public delegate void calvinDelegate(string s);
+        //===========================================================================
+        //===========================================================================
+        //===========================================================================
+        public delegate void DoWorkDelegate(object sender, DoWorkEventArgs e);
+
+        public void EvernoteBackend()
+        {
+            StartWorker(new DoWorkDelegate(bw_BackendWork));
+        }
+        public void UpdateFrontend()
+        {
+            Console.WriteLine("This was successfully called!");
+            StartWorker(new DoWorkDelegate(bw_FrontendWork));
+        }
+
+        public void StartWorker(DoWorkDelegate task)
+        {
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.WorkerReportsProgress = true;
+            //Console.WriteLine("About to have background worker do work");
+            //FreeConsole();
+            bw.DoWork += new DoWorkEventHandler(task);
+            bw.RunWorkerAsync();
+            //bw.DoWork += new DoWorkEventHandler(Calvin_Thread.bw_DoWork); //this here isn't doing anything
+            Console.WriteLine(bw.IsBusy); //currently writing false so is not busy
+            //while (bw.IsBusy)
+            //{
+              //  Console.WriteLine("busy bw");
+            //}
+            Console.WriteLine("done with starting the worker");
+        }
+
+        private void bw_BackendWork(Object sender, DoWorkEventArgs e)
+        {
+
+            //AllocConsole();
+            //Console.WriteLine("inside background worker!");
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            for (int i = 1; (i <= 5); i++)
+            {
+                //Console.WriteLine("Hello from the Thread Pool! Thread id: " + Thread.CurrentThread.ManagedThreadId);
+                if ((worker.CancellationPending == true))
+                {
+                    Console.WriteLine("Cancelling!");
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Hello from the background worker! Current Thread: " + Thread.CurrentThread.ManagedThreadId);
+
+                    //worker.ReportProgress((i * 10));
+                    Process p = new Process(); // create a new process for the python program to run in
+                    string pythonFile = @"C:\\Users\\Orit\\Documents\\GitHub\\CalvinCalendar\\python\\test2.py";
+                    p.StartInfo = new ProcessStartInfo(@"C:\Python27\python27.exe", pythonFile)
+                    {
+                        UseShellExecute = false,
+                        //RedirectStandardOutput = true,
+                        //RedirectStandardError = true,
+                        //CreateNoWindow = true,
+                    };
+                    p.EnableRaisingEvents = true;
+                    //p.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
+                    //p.ErrorDataReceived += new DataReceivedEventHandler(OnDataReceived);
+                    Thread.Sleep(20);
+                    //SurfaceWindow1.display.Update_Label(o, "hello");
+                    p.Start();
+                    Console.WriteLine("started process");
+                    //SurfaceWindow1.display.Update_Label(o, Console.ReadLine());
+                    Thread.Sleep(40);
+                    Console.Write("Thread went to sleep");
+                    /*using (reader) {
+                        //string l = reader.ReadLine();
+                        //Console.Write(l);
+                        Drag_and_Drop.SurfaceWindow1.main.Update_Label(o, reader.ReadLine());
+                    }*/
+                    //Console.Write("Made it!");
+                    //Drag_and_Drop.SurfaceWindow1.main.Update_Label(o, "Made It"); 
+                    //Console.WriteLine("made it through starting the process");
+                    //string output = p.StandardOutput.ReadToEnd();
+                    //Console.WriteLine(output);
+                    /*if (output.Equals("this is an image"))
+                    {
+                        Console.WriteLine("Recognized a thing");
+                    }*/
+                    //p.WaitForExit();
+                    //Console.WriteLine(output);
+                    //Console.ReadLine();
+                    //}
+                }
+            }
+            Console.WriteLine("background work done " + Thread.CurrentThread.ManagedThreadId);
+            //Thread.CurrentThread.Join();
+            //Console.WriteLine(worker.ToString()); 
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            this.UpdateFrontend();
+        }
+
+        private void bw_FrontendWork(Object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            Console.WriteLine("Hello from the newer thread!" + Thread.CurrentThread.ManagedThreadId);
+            this.Dispatcher.Invoke((Action) (() =>
+                //PythonOutput.Visibility = Visibility.Visible
+                SurfaceWindow1.ProcessDirectory("Resources/")
+            ));
+            Console.WriteLine("Made it visible!");
+        }
+
+        private static void bw_RunWorkerCompleted(
+            object sender,
+            RunWorkerCompletedEventArgs e)
+        {
+            Console.WriteLine("Background worker successfully completed.");
+        }
+        private static void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Console.WriteLine("Inside Progress Changed.  Hello" + e.ProgressPercentage);
+            //Thread.Sleep(100);
+
+        }
+
+
+        //===========================================================================
+        //===========================================================================
+        //===========================================================================
 
         /// <summary>
         /// Occurs when the window is about to close. 
@@ -451,61 +560,12 @@ namespace Drag_and_Drop
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
         static extern bool FreeConsole();*/
         //static int i = 0;
-        static object o = new object();
-
-        /*public static void Main()
-        {
-            Console.WriteLine("Calvin's Main Thread's managed thread id: " + Thread.CurrentThread.ManagedThreadId.ToString());
-
-            // Create a thread by ThreadPool.QueueUserWorkItem.
-            ThreadPool.QueueUserWorkItem(new WaitCallback(RunCalvin));
-
-
-            Console.Read();
-        }*/
-        /*public static void RunCalvin(Object stateInfo)
-        {
-            lock (o)
-            {
-                Console.WriteLine("\r\nLaunching Calvin Calendar Window... thread's managed thread id: " + Thread.CurrentThread.ManagedThreadId.ToString());
-                ThreadPool.QueueUserWorkItem(new WaitCallback(CheckEvernote));
-            }
-        }*/
+        //static object o = new object();
         //public StreamReader StandardOutput { get; }
-        private void bw_DoWork(Object sender, DoWorkEventArgs e)
-        {
-
-            //AllocConsole();
-            Console.WriteLine("inside background worker!");
-            BackgroundWorker worker = sender as BackgroundWorker;
-
-            for (int i = 1; (i <= 100); i++)
-            {
-                Console.WriteLine("Hello from the Thread Pool! Thread id: " + Thread.CurrentThread.ManagedThreadId);
-                if ((worker.CancellationPending == true))
-                {
-                    Console.WriteLine("Cancelling!");
-                    e.Cancel = true;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-                    //Thread.Sleep(500);
-                    worker.ReportProgress((i * 10));
-                }
-            }
-        }
-        private static void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            Console.WriteLine("Hello" + e.ProgressPercentage);
-            //Thread.Sleep(100);
-
-        }
-        public static void ThreadTest(Object stateInfo)
+        /*public static void ThreadTest(Object stateInfo)
         {
             Console.WriteLine("Inside a thread class! Thread id:" + Thread.CurrentThread.ManagedThreadId);
-        }
+        }*/
         public static void CheckEvernote(Object stateInfo)
         {
             //lock (o)
@@ -525,10 +585,10 @@ namespace Drag_and_Drop
             //p.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
             //p.ErrorDataReceived += new DataReceivedEventHandler(OnDataReceived);
             Thread.Sleep(20);
-            SurfaceWindow1.display.Update_Label(o, "hello");
+            //SurfaceWindow1.display.Update_Label(o, "hello");
             p.Start();
             Console.WriteLine("started process");
-            SurfaceWindow1.display.Update_Label(o, Console.ReadLine());
+            //SurfaceWindow1.display.Update_Label(o, Console.ReadLine());
             Thread.Sleep(40);
             Console.Write("Thread went to sleep");
             /*using (reader) {
