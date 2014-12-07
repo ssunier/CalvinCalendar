@@ -1,0 +1,14 @@
+﻿<s:SurfaceWindow x:Class="ThreadingApplication.SurfaceWindow1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    Title="ThreadingApplication"
+    >
+  <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="AliceBlue"/>
+        </Grid.Background>
+        <Label Name="ThreadLabel" Background="Gray" Visibility="Visible" Content="Thread1">
+        </Label>
+    </Grid>
+</s:SurfaceWindow>

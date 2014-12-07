@@ -12,7 +12,7 @@ def main(argv):
         else:
             print 'this is an image'
         i=i+1
-        time.sleep(10)
+        time.sleep(20)
 
 if __name__ == '__main__':
     main(sys.argv)

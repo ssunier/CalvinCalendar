@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{78085C88-6BDF-43D4-AB5F-F97BFF40425A}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{CA33C035-CCF8-406F-B6F2-54797755D863}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Calvin</RootNamespace>
-    <AssemblyName>Calvin</AssemblyName>
+    <RootNamespace>ThreadingApplication</RootNamespace>
+    <AssemblyName>ThreadingApplication</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Calvin.App</StartupObject>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,11 +63,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Alpha.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PhotoData.cs" />
     <Compile Include="SurfaceWindow1.xaml.cs">
       <DependentUpon>SurfaceWindow1.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -98,20 +98,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\late.png" />
-    <Resource Include="Resources\practice.png" />
-    <Resource Include="Resources\imgres.jpg" />
-    <Resource Include="Resources\images.jpg" />
-    <Resource Include="Resources\Desert.jpg" />
-    <Resource Include="Resources\Hydrangeas.jpg" />
-    <Resource Include="Resources\calvin1.png" />
-    <Resource Include="Resources\grocery.png" />
-    <Resource Include="Resources\blank-calendar.jpg" />
-    <Resource Include="Resources\blank-calendar2.png" />
     <Content Include="Resources\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Calvin.xml">
+    <Content Include="ThreadingApplication.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
