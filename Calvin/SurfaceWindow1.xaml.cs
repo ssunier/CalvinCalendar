@@ -24,11 +24,8 @@ using System.Runtime.InteropServices;
 using System.Diagnostics; // Process
 using System.IO; // StreamReader
 using System.Data;
-// IMPORTING IMAGES
-using System.Collections;
 
 
-//using Threading;
 namespace Drag_and_Drop
 {
 
@@ -39,7 +36,7 @@ namespace Drag_and_Drop
     {
         [DllImport("kernel32.dll")]
         public static extern bool AllocConsole();
-        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling=true /*CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall*/)]
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling=true)]
         public static extern bool FreeConsole();
         #region Collections
         private static ObservableCollection<PhotoData> libraryItems;
@@ -75,80 +72,54 @@ namespace Drag_and_Drop
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public SurfaceWindow1()//Delegate d
+        public SurfaceWindow1()
         {
             this.DataContext = this;
-            //display = this;
             InitializeComponent();
+        }
 
-            // Add handlers for window availability events
-            //AddWindowAvailabilityHandlers();
-        }//);
-
-        //===================================================================================================
-        //TRYING SOME SHIT HERE TO GET THE BINDING WORKING
-        //===================================================================================================
+        // ===================================================================================================
+        // METHOD: ADD DOWNLOADED IMAGES FROM EVERNOTE TO THE SURFACE APPLICATION
+        // ===================================================================================================
 
         public static void ProcessDirectory(String targetDirectory)
         {
-            //System.IO.Directory myDir;
+            //LibraryItems.Clear();
             // Process the list of files found in the directory
             string[] fileEntries = Directory.GetFiles(@"C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\" + targetDirectory);
-            //IEnumerable fileEntries = Directory.EnumerateFiles(targetDirectory);
-            Console.WriteLine("files: " + Directory.GetFiles(@"C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\" + targetDirectory));
-            Console.WriteLine("inside process directory");
-            //Console.WriteLine(Directory.EnumerateFiles(targetDirectory));
-            //Console.WriteLine(targetDirectory);
             foreach (string fileName in fileEntries)
             {
-                //ProcessFile(fileEntries);
-                Console.WriteLine("Trying to add images now");
-                Console.WriteLine(fileName);
                 LibraryItems.Add(new PhotoData(fileName, ""));
-                Console.WriteLine("Potentially added the images??? IDK");
             }
         }
-        /*
-        // Do the stuff lsksflkdsf here
-        public static void ProcessFile(string[] fileEntries)
-        {
-            foreach 
-        }*/
+
+        // ===================================================================================================
+        // METHOD: INITIALIZE SURFACE APPLICATION AND CREATE THREADS
+        // ===================================================================================================
 
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
             DataContext = this;
             AllocConsole();
-            Console.WriteLine("About to create a new queuing Thread.  Current Thread:" + Thread.CurrentThread.ManagedThreadId);
+            Console.WriteLine("About to create a new queuing Thread. Current Thread:" + Thread.CurrentThread.ManagedThreadId);
             Dispatcher.Invoke((Action) delegate()
             {
                 Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-                LibraryItems.Add(new PhotoData("Resources/practice.png", ""));
-                LibraryItems.Add(new PhotoData("Resources/late.png", ""));
-                LibraryItems.Add(new PhotoData("Resources/grocery.png", ""));
+                LibraryItems.Add(new PhotoData("Resources/Calvin1.png", ""));
+                LibraryItems.Add(new PhotoData("Resources/Calvin2.png", ""));
+                LibraryItems.Add(new PhotoData("Resources/Calvin3.png", ""));
                 AddWindowAvailabilityHandlers();
+                // Start the loop.
                 EvernoteBackend();
             });
-            Console.WriteLine("Idk when this will get called.");
-            //EvernoteBackend();
-            /*
-            BackgroundWorker bw = new BackgroundWorker();
-            bw.WorkerReportsProgress = true;
-            Console.WriteLine("About to have background worker do work");
-            //FreeConsole();
-            bw.DoWork += new DoWorkEventHandler(Calvin_Thread.bw_DoWork); //this here isn't doing anything
-            Console.WriteLine(bw.IsBusy); //currently writing false so is not busy
-            while (bw.IsBusy)
-            {
-                Console.WriteLine("busy bw");
-            }*/
         }
-        //internal static SurfaceWindow1 display;
-        //public delegate void calvinDelegate(string s);
-        //===========================================================================
-        //===========================================================================
-        //===========================================================================
+
+
+        // ===================================================================================================
+        // BEGIN THREAD CODE
+        // ===================================================================================================
+
         public delegate void DoWorkDelegate(object sender, DoWorkEventArgs e);
 
         public void EvernoteBackend()
@@ -157,7 +128,6 @@ namespace Drag_and_Drop
         }
         public void UpdateFrontend()
         {
-            Console.WriteLine("This was successfully called!");
             StartWorker(new DoWorkDelegate(bw_FrontendWork));
         }
 
@@ -165,29 +135,17 @@ namespace Drag_and_Drop
         {
             BackgroundWorker bw = new BackgroundWorker();
             bw.WorkerReportsProgress = true;
-            //Console.WriteLine("About to have background worker do work");
-            //FreeConsole();
             bw.DoWork += new DoWorkEventHandler(task);
             bw.RunWorkerAsync();
-            //bw.DoWork += new DoWorkEventHandler(Calvin_Thread.bw_DoWork); //this here isn't doing anything
-            Console.WriteLine(bw.IsBusy); //currently writing false so is not busy
-            //while (bw.IsBusy)
-            //{
-              //  Console.WriteLine("busy bw");
-            //}
-            Console.WriteLine("done with starting the worker");
+            Console.WriteLine("Done with starting the worker");
         }
 
         private void bw_BackendWork(Object sender, DoWorkEventArgs e)
         {
-
-            //AllocConsole();
-            //Console.WriteLine("inside background worker!");
             BackgroundWorker worker = sender as BackgroundWorker;
 
             for (int i = 1; (i <= 5); i++)
             {
-                //Console.WriteLine("Hello from the Thread Pool! Thread id: " + Thread.CurrentThread.ManagedThreadId);
                 if ((worker.CancellationPending == true))
                 {
                     Console.WriteLine("Cancelling!");
@@ -196,52 +154,25 @@ namespace Drag_and_Drop
                 }
                 else
                 {
+                    Thread.Sleep(1000);
                     Console.WriteLine("Hello from the background worker! Current Thread: " + Thread.CurrentThread.ManagedThreadId);
-
-                    //worker.ReportProgress((i * 10));
-                    Process p = new Process(); // create a new process for the python program to run in
+                    Process p = new Process(); // Create a new process for the python program to run in
                     string pythonFile = @"C:\\Users\\Orit\\Documents\\GitHub\\CalvinCalendar\\python\\test2.py";
                     p.StartInfo = new ProcessStartInfo(@"C:\Python27\python27.exe", pythonFile)
                     {
                         UseShellExecute = false,
-                        //RedirectStandardOutput = true,
-                        //RedirectStandardError = true,
-                        //CreateNoWindow = true,
                     };
                     p.EnableRaisingEvents = true;
-                    //p.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
-                    //p.ErrorDataReceived += new DataReceivedEventHandler(OnDataReceived);
                     Thread.Sleep(20);
                     //SurfaceWindow1.display.Update_Label(o, "hello");
                     p.Start();
-                    Console.WriteLine("started process");
+                    Console.WriteLine("Started process");
                     //SurfaceWindow1.display.Update_Label(o, Console.ReadLine());
                     Thread.Sleep(40);
                     Console.Write("Thread went to sleep");
-                    /*using (reader) {
-                        //string l = reader.ReadLine();
-                        //Console.Write(l);
-                        Drag_and_Drop.SurfaceWindow1.main.Update_Label(o, reader.ReadLine());
-                    }*/
-                    //Console.Write("Made it!");
-                    //Drag_and_Drop.SurfaceWindow1.main.Update_Label(o, "Made It"); 
-                    //Console.WriteLine("made it through starting the process");
-                    //string output = p.StandardOutput.ReadToEnd();
-                    //Console.WriteLine(output);
-                    /*if (output.Equals("this is an image"))
-                    {
-                        Console.WriteLine("Recognized a thing");
-                    }*/
-                    //p.WaitForExit();
-                    //Console.WriteLine(output);
-                    //Console.ReadLine();
-                    //}
                 }
             }
-            Console.WriteLine("background work done " + Thread.CurrentThread.ManagedThreadId);
-            //Thread.CurrentThread.Join();
-            //Console.WriteLine(worker.ToString()); 
-            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            Console.WriteLine("Background work done " + Thread.CurrentThread.ManagedThreadId);
             this.UpdateFrontend();
         }
 
@@ -250,10 +181,11 @@ namespace Drag_and_Drop
             BackgroundWorker worker = sender as BackgroundWorker;
             Console.WriteLine("Hello from the newer thread!" + Thread.CurrentThread.ManagedThreadId);
             this.Dispatcher.Invoke((Action) (() =>
-                //PythonOutput.Visibility = Visibility.Visible
-                SurfaceWindow1.ProcessDirectory("Resources/")
+                SurfaceWindow1.ProcessDirectory("Resources/newImages/")
             ));
             Console.WriteLine("Made it visible!");
+            // Comment this back in when you want to make it run infinitely
+            //this.EvernoteBackend();
         }
 
         private static void bw_RunWorkerCompleted(
@@ -265,14 +197,11 @@ namespace Drag_and_Drop
         private static void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             Console.WriteLine("Inside Progress Changed.  Hello" + e.ProgressPercentage);
-            //Thread.Sleep(100);
-
         }
 
-
-        //===========================================================================
-        //===========================================================================
-        //===========================================================================
+        // ===================================================================================================
+        // END THREAD CODE
+        // ===================================================================================================
 
         /// <summary>
         /// Occurs when the window is about to close. 
@@ -339,6 +268,10 @@ namespace Drag_and_Drop
         {
             //TODO: disable audio, animations here
         }
+
+        // ===================================================================================================
+        // FRONTEND UI: SURFACE CONTROLS
+        // ===================================================================================================
 
         private void Scatter_PreviewTouchDown(object sender, TouchEventArgs e)
         {
@@ -539,115 +472,10 @@ namespace Drag_and_Drop
             Console.WriteLine("About to update button tread id: " + Thread.CurrentThread.ManagedThreadId);
             this.Dispatcher.Invoke((Action)(() =>
                 PythonOutput.Content = s
-                //Console.Write(Thread.CurrentThread.ManagedThreadId)
             ));
             Console.Write("After updating button thread id:" + Thread.CurrentThread.ManagedThreadId);
         }
-    //}
-
-
-    //==========================================================================================
-    //==========================================================================================
-    // IDK what the hell I'm doing so I'm just trying random shit at this point
-    //==========================================================================================
-    //==========================================================================================
-    
-    
-    //public static class Calvin_Thread
-    //
-        /*[DllImport("kernel32.dll")]
-        static extern bool AllocConsole();
-        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
-        static extern bool FreeConsole();*/
-        //static int i = 0;
-        //static object o = new object();
-        //public StreamReader StandardOutput { get; }
-        /*public static void ThreadTest(Object stateInfo)
-        {
-            Console.WriteLine("Inside a thread class! Thread id:" + Thread.CurrentThread.ManagedThreadId);
-        }*/
-        public static void CheckEvernote(Object stateInfo)
-        {
-            //lock (o)
-            //{
-            Console.WriteLine("\r\nLaunching the evernote checking python script... thread's managed thread id: " + Thread.CurrentThread.ManagedThreadId.ToString());
-            //StreamReader reader = new StreamReader(Console.ReadLine());
-            Process p = new Process(); // create a new process for the python program to run in
-            string pythonFile = @"C:\\Users\\Orit\\Documents\\GitHub\\CalvinCalendar\\python\\tmp.py";
-            p.StartInfo = new ProcessStartInfo(@"C:\Python27\python27.exe", pythonFile)
-            {
-                UseShellExecute = false,
-                //RedirectStandardOutput = true,
-                //RedirectStandardError = true,
-                //CreateNoWindow = true,
-            };
-            p.EnableRaisingEvents = true;
-            //p.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
-            //p.ErrorDataReceived += new DataReceivedEventHandler(OnDataReceived);
-            Thread.Sleep(20);
-            //SurfaceWindow1.display.Update_Label(o, "hello");
-            p.Start();
-            Console.WriteLine("started process");
-            //SurfaceWindow1.display.Update_Label(o, Console.ReadLine());
-            Thread.Sleep(40);
-            Console.Write("Thread went to sleep");
-            /*using (reader) {
-                //string l = reader.ReadLine();
-                //Console.Write(l);
-                Drag_and_Drop.SurfaceWindow1.main.Update_Label(o, reader.ReadLine());
-            }*/
-            //Console.Write("Made it!");
-            //Drag_and_Drop.SurfaceWindow1.main.Update_Label(o, "Made It"); 
-            //Console.WriteLine("made it through starting the process");
-            //string output = p.StandardOutput.ReadToEnd();
-            //Console.WriteLine(output);
-            /*if (output.Equals("this is an image"))
-            {
-                Console.WriteLine("Recognized a thing");
-            }*/
-            //p.WaitForExit();
-            //Console.WriteLine(output);
-            //Console.ReadLine();
-            //}
-        }
-        /*public static void OutputDataReceived(object sender, DataReceivedEventArgs args)
-        {
-            //if (args.Data != null)
-            //{
-                Drag_and_Drop.SurfaceWindow1.main.Update_Label(o, args.Data);
-                // This is where we will bind it with Calvin
-
-            //}
-        }*/
-        /*
-        public void appendText(string text)
-        {
-            if (ResultTextBox.InvokeRequired)
-            {
-            }
-        }*/
-
-        public delegate void UpdateTextCallback(string message);
-
-        /*private void TestThread()
-        {
-            for (int i = 0; i <= 1000000000; i++)
-            {
-                Thread.Sleep(1000);
-                PythonOutput.
-                .Dispatcher.Invoke(
-                    new UpdateTextCallback(this.UpdateText),
-                    new object[] { i.ToString }
-                );
-            }
-        }*/
-
-        /*private void UpdateText(string message)
-        {
-            richTextBox1.AppendText(message + '\n');
-        }*/
 
     }
 
-    // End trying random crap
 }

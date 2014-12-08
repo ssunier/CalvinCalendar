@@ -27,7 +27,7 @@ def getImage(count, rerun):
           file_name = resource.attributes.fileName
 
           # save the file into the output folder
-          file_save = open('output/' + file_name, "wb")
+          file_save = open('../Calvin/output/' + file_name, "wb")
           file_save.write(file_content)
           file_save.close()
           print file_name

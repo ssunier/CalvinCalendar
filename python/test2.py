@@ -8,7 +8,7 @@ for filename in os.listdir('C:/Users/Orit/Documents/GitHub/CalvinCalendar/python
     #print readFile
     with open(readFile, 'rb') as f:
         data = f.read()
-    writeFile = 'C:/Users/Orit/Documents/GitHub/CalvinCalendar/Calvin/Resources/' + filename
+    writeFile = 'C:/Users/Orit/Documents/GitHub/CalvinCalendar/Calvin/Resources/newImages/' + filename
     print "Wrote the file: ", writeFile
     with open(writeFile, 'wb') as f:
         f.write(data)

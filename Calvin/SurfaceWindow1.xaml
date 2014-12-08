@@ -37,12 +37,9 @@
         </Grid.RowDefinitions>
         
         <Grid.Background>
-            <ImageBrush ImageSource="calvin1.png"
+            <ImageBrush ImageSource="calvinf.png"
                         Stretch="UniformToFill"/>
         </Grid.Background>
-
-     
-       
 
         <s:SurfaceListBox 
             x:Name="ListBox"

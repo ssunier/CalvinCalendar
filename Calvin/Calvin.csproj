@@ -100,18 +100,23 @@
   <ItemGroup>
     <Resource Include="Resources\late.png" />
     <Resource Include="Resources\practice.png" />
-    <Resource Include="Resources\imgres.jpg" />
-    <Resource Include="Resources\images.jpg" />
     <Resource Include="Resources\Desert.jpg" />
-    <Resource Include="Resources\Hydrangeas.jpg" />
     <Resource Include="Resources\grocery.png" />
     <Resource Include="calvin1.png" />
+    <Resource Include="calvin2.png" />
+    <Resource Include="calvinf.png" />
+    <Resource Include="Resources\Calvin1.png" />
+    <Resource Include="Resources\Calvin2.png" />
+    <Resource Include="Resources\Calvin3.png" />
     <Content Include="Resources\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Calvin.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\newImages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
