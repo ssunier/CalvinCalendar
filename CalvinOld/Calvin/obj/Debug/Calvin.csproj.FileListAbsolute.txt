@@ -1,6 +1,0 @@
-C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\Calvin\obj\Debug\Calvin.csprojResolveAssemblyReference.cache
-C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\Calvin\obj\Debug\App.baml
-C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\Calvin\obj\Debug\SurfaceWindow1.g.cs
-C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\Calvin\obj\Debug\App.g.cs
-C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\Calvin\obj\Debug\Calvin_Content.g.cs
-C:\Users\Orit\Documents\GitHub\CalvinCalendar\Calvin\Calvin\obj\Debug\Calvin_MarkupCompile.cache
