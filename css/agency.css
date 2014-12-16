@@ -269,7 +269,6 @@ fieldset[disabled] .btn-xl.active {
         font-size: 1.5em;
     }
 }
-
 header {
     text-align: center;
     color: #ff7926; /*edited here*/
@@ -310,7 +309,15 @@ header .intro-text .intro-heading {
     font-weight: 700;
     line-height: 50px;
     
+    
 }
+/*.intro-glass{
+    display: block;
+    width: 105%;
+    height: 105%;
+    background-color:white;
+    filter: blur(5px);
+}*/
 
 @media(min-width:768px) {
     header .intro-text {
