@@ -6,10 +6,14 @@ h1 {
 h2 {
 	font-family: 'Quicksand', sans-serif; font-weight: 400;
 }
+.demo {
+  margin: 0;
+  padding: 0;
+}
 .demo .overlayVideo {
   position: absolute;
   left: -3000px;
-  top: -100px;
+  top: -1000px;
   z-index: 6;
   visibility: hidden;
 }
@@ -26,7 +30,7 @@ h2 {
   opacity: 1;
 }
 .demo #video_container #text {
-  position: absolute;
+  position: relative;
   z-index: 6;
   text-align: center;
   opacity: 0;
@@ -42,14 +46,14 @@ h2 {
   display: block;
 }
 .demo #video_container #text #playbutton .rectangle {
-  background-color: #3ea9f5;
+  background-color: #fed136;
   width: 149px;
   height: 95px;
   opacity: 0.8;
   margin: 0 auto;
 }
 .demo #video_container #text #playbutton .rectangle:hover {
-  background-color: #52bdff;
+  background-color: #fec503;
   cursor: pointer;
 }
 .demo #video_container #text #playbutton .triangle {
@@ -87,7 +91,7 @@ h2 {
   top: 0;
   left: 0;
   z-index: 3;
-  background-image: url(../images/main.jpg);
+  background-image: url(../images/calvin2.png);
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;

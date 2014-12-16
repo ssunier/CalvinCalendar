@@ -358,9 +358,9 @@ section h3.section-subheading {
 }
 
 @media(min-width:768px) {
-    section {
+    /*section {
         padding: 150px 0;
-    }
+    }*/
 }
 
 .service-heading {
@@ -687,7 +687,6 @@ section#concept{
     background-color: #d90b31;
     color: white;
 }
- 
 section#concept .section-subheading{
     color: #f5f5f5;
 }
@@ -705,6 +704,9 @@ section#design .section-subheading{
     color:#f5f5f5;
 }
 
+section#demo{
+    padding:0;
+}
 section#future{
     background-color: #d90b31;
     color: white;
@@ -712,7 +714,7 @@ section#future{
 
 section#contact {
     background-color: #222;
-    background-image: url(../img/map-image.png);
+    /*background-image: url(../image/map-image.png);*/
     background-position: center;
     background-repeat: no-repeat;
 }
