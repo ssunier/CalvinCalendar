@@ -682,6 +682,7 @@ aside.clients img {
 section#about{
     background-color: #a60abc;
     color: white;
+    min-height: 700px;
 
 }
 
@@ -696,6 +697,7 @@ section#about .section-heading{
 section#concept{
     background-color: #d90b31;
     color: white;
+    min-height: 700px;
 }
 section#concept .section-subheading{
     color: #f5f5f5;
@@ -708,6 +710,7 @@ section#concept .section-heading{
 section#design{
     background-color: #a60abc;
     color: white;
+    min-height: 700px;
 }
 
 section#design .section-subheading{
@@ -720,11 +723,12 @@ section#demo{
 section#future{
     background-color: #d90b31;
     color: white;
+    min-height: 700px;
 }
 
 section#contact {
+    min-height: 700px;
     background-color: #222;
-    /*background-image: url(../image/map-image.png);*/
     background-position: center;
     background-repeat: no-repeat;
 }
