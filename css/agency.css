@@ -269,11 +269,11 @@ fieldset[disabled] .btn-xl.active {
         font-size: 1.5em;
     }
 }
-header {
-    text-align: center;
-    color: #ff7926; /*edited here*/
-    background-attachment: scroll;
-    background-image: url(../images/cover.png); /*added new image*/
+.intro-bkd {
+    margin-top:50px;
+    background-image: url(../images/cover.png);
+    background-repeat:none;
+    background-size:cover;
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;
@@ -281,12 +281,15 @@ header {
     background-size: cover;
     -o-background-size: cover;
 }
+header {
+    text-align: center;
+    color: #ff7926; /*edited here*/
+    background-color: whitesmoke;
+}
 
 header .intro-text {
     padding-top: 100px;
     padding-bottom: 50px;
-
-
 }
 
 header .intro-text .intro-lead-in {
