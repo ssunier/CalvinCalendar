@@ -19,6 +19,7 @@ fullScreenVideo = {
      * @param None
      */
     embedVideo: function()
+      //Console.log('inside embed video function');
     {
       var videoOptions = {};
   
