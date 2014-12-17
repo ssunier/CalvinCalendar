@@ -34,7 +34,7 @@ a:focus,
 a:active,
 a.active {
     outline: 0;
-    background-color: #07d9c4;
+    background-color: transparent;
    
 }
 
@@ -241,9 +241,9 @@ fieldset[disabled] .btn-xl.active {
 
 @media(min-width:768px) {
     .navbar-default {
-        padding: 25px 0;
+        padding: 8px 0;
         border: 0;
-        background-color: transparent;
+        background-color: 000; /* HERE HERE HERE FOR NAV BG*/ /*Joanna*/
         -webkit-transition: padding .3s;
         -moz-transition: padding .3s;
         transition: padding .3s;
@@ -878,7 +878,7 @@ ul.social-buttons li a:active {
     right: 25px;
     width: 75px;
     height: 75px;
-    background-color: transparent;
+    background-color: #000;
     cursor: pointer;
 }
 
