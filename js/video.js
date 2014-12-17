@@ -9,18 +9,18 @@ fullScreenVideo = {
      * backgroundvideo: The video in the backgorund
      * backgroundideoDiv: The jQuery selector of the div containing the background video
      */
-    overlayVideo: 'fji9juvptr',
-    overlayVideoDiv: '#wistia_fji9juvptr',
-    backgroundvideo: 'z1ggfo8f86',
-    backgroundideoDiv: '#wistia_z1ggfo8f86',
+    overlayVideo: '9iubokzbbs',
+    overlayVideoDiv: '#wistia_9iubokzbbs',
+    backgroundvideo: '72uymjzcl7',
+    backgroundideoDiv: '#wistia_72uymjzcl7',
     
     /**
      * This will call Wistia and embed the two videos
      * @param None
      */
     embedVideo: function()
-      //Console.log('inside embed video function');
     {
+      console.log('inside embed video function');
       var videoOptions = {};
   
       // Add the crop fill plugin to the videoOptions
@@ -31,6 +31,7 @@ fullScreenVideo = {
           }
         }
       });
+      console.log('Wistia was defined correctly');
 
       // Video in the background
       wistiaEmbed = Wistia.embed(fullScreenVideo.backgroundvideo, videoOptions);
