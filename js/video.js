@@ -9,10 +9,10 @@ fullScreenVideo = {
      * backgroundvideo: The video in the backgorund
      * backgroundideoDiv: The jQuery selector of the div containing the background video
      */
-    overlayVideo: '72uymjzcl7',
-    overlayVideoDiv: '#wistia_72uymjzcl7',
-    backgroundvideo: '9iubokzbbs',
-    backgroundideoDiv: '#wistia_9iubokzbbs',
+    overlayVideo: 'fji9juvptr',
+    overlayVideoDiv: '#wistia_fji9juvptr',
+    backgroundvideo: 'z1ggfo8f86',
+    backgroundideoDiv: '#wistia_z1ggfo8f86',
     
     /**
      * This will call Wistia and embed the two videos
