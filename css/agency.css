@@ -314,16 +314,14 @@ header .intro-text .intro-heading {
     
     
 }
-/*.intro-glass{
+.intro-glass{
     display: block;
-    width: 105%;
-    height: 105%;
-    background-color:white;
-    filter: blur(5px);
-}*/
+    background-color:rgba(245,245,245,0.5);
+}
 
 @media(min-width:768px) {
     header .intro-text {
+        z-index:1;
         padding-top: 300px;
         padding-bottom: 200px;
     }
