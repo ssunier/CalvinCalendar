@@ -9,10 +9,10 @@ fullScreenVideo = {
      * backgroundvideo: The video in the backgorund
      * backgroundideoDiv: The jQuery selector of the div containing the background video
      */
-    overlayVideo: 'fji9juvptr',
-    overlayVideoDiv: '#wistia_fji9juvptr',
-    backgroundvideo: 'z1ggfo8f86',
-    backgroundideoDiv: '#wistia_z1ggfo8f86',
+    overlayVideo: '72uymjzcl7',
+    overlayVideoDiv: '#wistia_72uymjzcl7',
+    backgroundvideo: '9iubokzbbs',
+    backgroundideoDiv: '#wistia_9iubokzbbs',
     
     /**
      * This will call Wistia and embed the two videos
@@ -26,7 +26,7 @@ fullScreenVideo = {
       Wistia.obj.merge(videoOptions, {
         plugin: {
           cropFill: {
-            src: "//fast.wistia.com/labs/crop-fill/plugin.js"
+            src: "https://fast.wistia.com/labs/crop-fill/plugin.js"
           }
         }
       });
